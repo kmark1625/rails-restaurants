@@ -22,6 +22,7 @@ Another possible decision was to create a genetic algorithm which would be able 
 I decided to have a landing page for file uploads. Note that on Heroku this means that multiple users are all sharing the same filespace. My intention for this is that I was thinking of adding user login so that each user would have access to their own landing page. For the context of this challenge, I didn't want the user to have to login in order to use the app. This main page could also be adapted to only handle a single input at a time of the user is not logged in. I preferred to show the full user experience so I decided not to implement user login/registration capability. The program could be expanded to meet this behavior.
 
 ## User Stories
+* The user can go to the website and upload a txt menu
 
 ## Testing & Edge Cases
 Testing was very important to this application. I have uploaded a number of test menus I used to test this application. I also have documented the contents of each file. Below I list some of the input validation that is performed on the input .txt file.
