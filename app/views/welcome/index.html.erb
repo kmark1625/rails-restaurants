@@ -4,5 +4,5 @@
 </section>
 <section class="about">
   <h2>About This Page</h2>
-  <p>Allows user to submit a menu and a target price. The user will then be presented with a combination of items that add up to the target price exactly, should one exist.</p>
+  <p>This project seeks to address the problem of ordering in a restaurant. Given a desired amount of money you wish to spend, the site should allow the user to find a combination of items that add up to the order exactly. This is a NP-hard problem. As such, the expected runtime of the solution is exponential with the number of menu items. A trade-off was made to prevent large menu items from being loaded (the user will receive an error letting them know the menu is too large) rather than forcing the user to wait. Scalability testing was performed to determine the large number of items. Profiling was used to determine a 5 second wait. Any number of items greater than this results in an error message.</p>
 </section>
