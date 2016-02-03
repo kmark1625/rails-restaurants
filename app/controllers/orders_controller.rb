@@ -4,6 +4,7 @@ class OrdersController < ApplicationController
     menu = parse_file
     @item_array = menu.find_combination
     @number_of_items = @item_array.length
+    @target_price = menu.target_price
   end
 
   private

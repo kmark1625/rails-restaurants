@@ -1,6 +1,7 @@
 <h1>View the order</h1>
 <p>Filename: <%= @inputfile.name %></p>
-<p>Url: <%= @inputfile.attachment_url %></p>
+<p><%= link_to "View Input File", @inputfile.attachment_url %></p>
+<p>Target Price: <%= @target_price %></p>
 <p>Number of items: <%= @number_of_items %></p>
 
 <table class = "table table-bordered table-striped">
