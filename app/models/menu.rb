@@ -16,10 +16,6 @@ class Menu
     (target_price_in_cents).times do
       states.push([-1]) # value to represent no current solution found for given state
     end
-    # puts "Items:"
-    # p item_array
-    # puts "State:"
-    # p states
 
     states.each_with_index do |state, index|
       item_array.each do |item|
@@ -28,7 +24,25 @@ class Menu
         end
       end
     end
-    puts "Number of items: #{states[-1][-1]}"
-    return states[-1][-1]
+    item_array = get_list_of_items(states)
+    return item_array
+  end
+
+  def get_list_of_items(states_array)
+    target_price_in_cents = (target_price * 100).to_i
+    item_array = []
+    return item_array if states_array[target_price_in_cents][-1] == -1
+    continue = true
+    next_val = target_price_in_cents
+    while continue
+      if states_array[next_val][1] == 0
+        continue = false
+      else
+        item_array.push(states_array[next_val][0])
+        next_val = states_array[next_val][1]
+      end
+    end
+    item_array.push(states_array[next_val][0])
+    return item_array
   end
 end

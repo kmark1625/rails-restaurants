@@ -13,10 +13,12 @@
   </thead>
 
   <tbody>
+    <% @item_array.each do |item| %>
     <tr>
-      <td>"Sample name"</td>
-      <td>"Sample price"</td>
-      <td>"Sample quantity"</td>
+      <td><%= item.name %></td>
+      <td><%= item.price %></td>
+      <td>1</td>
     </tr>
+    <% end %>
   </tbody>
 </table>
