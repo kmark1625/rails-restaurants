@@ -36,11 +36,25 @@ Another important piece of testing was scalability testing. As the problem is an
 * Returns error if not a float or string in given position
 
 * menu.txt
-** This menu is the standard menu with the problem
+  * Valid menu which is the provided menu with the problem
 * menu2.txt
-** Has an extra item that is very small in cost.
+  * Valid menu with an extra item that is very small in cost.
 * menu3.txt
-** Has an extra item that allows total number of items to be reduced
+  * Valid menu with an extra item that allows total number of items to be reduced
+* menu4.txt
+  * Invalid menu with no menu items
+* menu5.txt
+  * Valid menu with items containing no solution
+* menu6.txt
+  * Invalid menu with string values for prices instead of floats.
+* menu7.txt
+  * Valid menu with all items on one line
+* menu8.txt
+  * Invalid menu with numbers instead of string
+* menu9.txt
+  * Valid menu with no dollar signs
+* menu10.txt
+  * Invalid menu with no commas
 
 ## Deployment Instructions
 This application makes use of CarrierWave. As a result, ImageMagick must be installed on the machine. If using OSX, brew install imagemagick.
