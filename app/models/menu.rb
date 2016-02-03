@@ -46,4 +46,19 @@ class Menu
     item_array.push(states_array[next_val][0])
     return item_array
   end
+
+  # takes in an array of items and gets a hash with quantity values
+  def get_quantities(items_array)
+    # [item1, item2, item3, item4, etc]
+    quantities = {}
+    items_array.each do |item|
+      item_name = item.name
+      if quantities.keys.include?(item_name)
+        quantities[item_name].quantity +=1
+      else
+        quantities[item_name] = item
+      end
+    end
+    return quantities
+  end
 end

@@ -14,15 +14,17 @@
         <th>Item</th>
         <th>Price</th>
         <th>Quantity</th>
+        <th>Total Price</th>
       </tr>
     </thead>
 
     <tbody>
-      <% @item_array.each do |item| %>
+      <% @item_hash.each do |item_name, item| %>
       <tr>
         <td><%= item.name %></td>
-        <td><%= item.price %></td>
-        <td>1</td>
+        <td>$<%= item.price %></td>
+        <td><%= item.quantity %></td>
+        <td>$<%= (item.price * item.quantity).round(2) %>
       </tr>
       <% end %>
     </tbody>
