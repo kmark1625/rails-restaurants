@@ -2,9 +2,11 @@ Rails.application.routes.draw do
   root 'inputfiles#index'
   get 'welcome/index'
 
-  resources :inputfiles, only: [:index, :new, :create, :destroy]
+  resources :inputfiles, only: [:index, :new, :create, :destroy] do
+    resources :orders, only: [:index]
+  end
 
-  resources :orders, only: [:index]
+  # resources :orders, only: [:index]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -29,5 +29,6 @@ class Menu
       end
     end
     puts "Number of items: #{states[-1][-1]}"
+    return states[-1][-1]
   end
 end

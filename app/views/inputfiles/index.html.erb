@@ -25,7 +25,7 @@
       <tr>
         <td><%= inputfile.name %></td>
         <td><%= link_to "Download Input File", inputfile.attachment_url %></td>
-        <td>Calculate Order</td>
+        <td><%= link_to "Calculate Order", inputfile_orders_path(inputfile) %></td>
         <td><%= button_to "Delete", inputfile, method: :delete, class: "btn btn-danger", confirm: "Are you sure that you wish to delete #{inputfile.name}?" %></td>
       </tr>
     <% end %>
