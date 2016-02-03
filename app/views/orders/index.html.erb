@@ -1,6 +1,7 @@
 <h1>View the order</h1>
 <p>Filename: <%= @inputfile.name %></p>
 <p><%= link_to "View Input File", @inputfile.attachment_url %></p>
+<%= File.read(@image_link) %>
 <p>Target Price: <%= @target_price %></p>
 
 <% if @number_of_items == 0 %>
