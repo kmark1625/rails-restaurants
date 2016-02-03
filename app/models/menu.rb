@@ -1,20 +1,21 @@
 class Menu
   attr_accessor :target_price, :item_array
-  # Takes in the target price (float) and a hash with the items and the respective price
+  # Expects target price (float) and an array of items
   def initialize(target_price, item_array)
     @target_price = target_price
     @item_array = item_array
   end
 
-  # Finds combination of items that match the target price exactly or returns nil.
-  # Returned in the form of a hash {"item name" => quantity}
+  # Finds combination of items that match the target price exactly or returns an empty array
+  # Returns an array of items
   def find_combination
     target_price_in_cents = (target_price * 100).to_i
     # format for each state: [item, previous state #, min_items]
     states = [0] # for the first state we will need to push 0
 
+    # -1 represents no current solution found for given state
     (target_price_in_cents).times do
-      states.push([-1]) # value to represent no current solution found for given state
+      states.push([-1])
     end
 
     states.each_with_index do |state, index|
@@ -44,5 +45,20 @@ class Menu
     end
     item_array.push(states_array[next_val][0])
     return item_array
+  end
+
+  # takes in an array of items and gets a hash with quantity values
+  def get_quantities(items_array)
+    # [item1, item2, item3, item4, etc]
+    quantities = {}
+    items_array.each do |item|
+      item_name = item.name
+      if quantities.keys.include?(item_name)
+        quantities[item_name].quantity +=1
+      else
+        quantities[item_name] = item
+      end
+    end
+    return quantities
   end
 end
