@@ -24,7 +24,32 @@ I decided to have a landing page for file uploads. Note that on Heroku this mean
 ## User Stories
 
 ## Testing & Edge Cases
+Testing was very important to this application. I have uploaded a number of test menus I used to test this application. I also have documented the contents of each file. Below I list some of the input validation that is performed on the input .txt file.
+
+Another important piece of testing was scalability testing. As the problem is an NP-hard problem, it is likely to have poor performance with a large number of items. I decided that the intended behavior I wanted was to cap the number of allowed items for performance. As a result, I performed scalability testing to determine the number of items which causes poor performance (rated as taking 5 seconds to compute on my local machine). Any menus that exceeded this amount were sent back as errors.
+
+#### Input Validation
+* Handles one line input
+* Handles multiple line input
+* Handles files with and without $
+* Returns error if not a float or string in given position
+
+* menu.txt
+** This menu is the standard menu with the problem
+* menu2.txt
+** Has an extra item that is very small in cost.
+* menu3.txt
+** Has an extra item that allows total number of items to be reduced
 
 ## Deployment Instructions
+This application makes use of CarrierWave. As a result, ImageMagick must be installed on the machine. If using OSX, brew install imagemagick.
+
+git clone repo
+cd directory
+bundle install
+rake db:create
+rake db:migrate
+rails s
+
 
 
