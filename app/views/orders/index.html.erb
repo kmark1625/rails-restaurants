@@ -2,24 +2,28 @@
 <p>Filename: <%= @inputfile.name %></p>
 <p><%= link_to "View Input File", @inputfile.attachment_url %></p>
 <p>Target Price: <%= @target_price %></p>
-<p>Number of items: <%= @number_of_items %></p>
 
-<table class = "table table-bordered table-striped">
-  <thead>
-    <tr>
-      <th>Item</th>
-      <th>Price</th>
-      <th>Quantity</th>
-    </tr>
-  </thead>
+<% if @number_of_items == 0 %>
+  <p>There is no combination of menu items that adds up to exactly $<%= @target_price %></p>
+<% else %>
+  <p>Number of items: <%= @number_of_items %></p>
+  <table class = "table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Price</th>
+        <th>Quantity</th>
+      </tr>
+    </thead>
 
-  <tbody>
-    <% @item_array.each do |item| %>
-    <tr>
-      <td><%= item.name %></td>
-      <td><%= item.price %></td>
-      <td>1</td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+    <tbody>
+      <% @item_array.each do |item| %>
+      <tr>
+        <td><%= item.name %></td>
+        <td><%= item.price %></td>
+        <td>1</td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
