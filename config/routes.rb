@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'inputfiles#index'
+  root 'welcome#index'
   get 'welcome/index'
 
   resources :inputfiles, only: [:index, :new, :create, :destroy] do
