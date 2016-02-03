@@ -2,3 +2,23 @@
 <p>Filename: <%= @inputfile.name %></p>
 <p>Url: <%= @inputfile.attachment_url %></p>
 <p>Number of items: <%= @number_of_items %></p>
+
+<table class = "table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Price</th>
+      <th>Quantity</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @item_array.each do |item| %>
+    <tr>
+      <td><%= item.name %></td>
+      <td><%= item.price %></td>
+      <td>1</td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

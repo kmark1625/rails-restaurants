@@ -2,12 +2,12 @@ class OrdersController < ApplicationController
   def index
     @inputfile = Inputfile.find_by(id: params[:inputfile_id])
     menu = parse_file
-    @number_of_items = menu.find_combination
+    @item_array = menu.find_combination
+    @number_of_items = @item_array.length
   end
 
   private
   def parse_file
-    puts "HELLO THERE!"
     directory = "public"
     f = File.open(File.join(directory, @inputfile.attachment_url), 'r')
     item_array = []
