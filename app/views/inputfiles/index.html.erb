@@ -15,7 +15,7 @@
     <thead>
       <tr>
         <th>Name</th>
-        <th>View File</th>
+        <th>Description</th>
         <th>Calculate Order</th>
         <th>Delete File</th>
       </tr>
@@ -26,7 +26,7 @@
         <% if inputfile.name != "Sample Menu 1" && inputfile.name != "Sample Menu 2" && inputfile.name != "Sample Menu 3" %>
           <tr>
             <td><%= inputfile.name %></td>
-            <td><%= button_to "View", inputfile.attachment_url, method: :get, class: "btn btn-primary" %></td>
+            <td><%= inputfile.description %></td>
             <td><%= button_to "Calculate", inputfile_orders_path(inputfile), method: :get, class: "btn btn-primary" %></td>
             <td><%= button_to "Delete", inputfile, method: :delete, class: "btn btn-danger", confirm: "Are you sure that you wish to delete #{inputfile.name}?" %></td>
           </tr>

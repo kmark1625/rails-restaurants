@@ -10,9 +10,8 @@
 
     </div>
   <% end %>
-
   <div class = "well">
-    <div class="container"
+    <div class="container">
       <%= form_for @inputfile, html: { multipart: true } do |f| %>
         <p><%= f.label :name, "Menu Name"%></p>
         <p><%= f.text_field :name %></p>
