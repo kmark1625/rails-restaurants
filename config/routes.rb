@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
   get 'welcome/index'
 
+  resources :help, only: [:index]
   resources :inputfiles, only: [:index, :new, :create, :destroy] do
     resources :orders, only: [:index]
   end

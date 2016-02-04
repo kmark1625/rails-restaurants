@@ -40,9 +40,16 @@ body {
 }
 .about {
   background-color: #2c3e50;
-  padding: 20px;
+  padding-left: 17%;
+  padding-right: 17%;
+  padding-top: 10px;
+  padding-bottom: 10px;
   text-align: center;
   color: white;
+}
+.item-display-text {
+  width: 250px;
+  height: 200px;
 }
 #mainpage-image {
   display: block;
