@@ -1,6 +1,7 @@
 class Inputfile < ActiveRecord::Base
   mount_uploader :attachment, AttachmentUploader
-  validates :name, presence: true
+  validates :name, presence: true, length: { maximum: 50 }
+  validates :description, presence: true, length: { maximum: 255 }
   # custom validations on attachment
   validate :target_price_must_be_valid, :not_too_many_items
 
