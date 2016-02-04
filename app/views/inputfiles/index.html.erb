@@ -15,9 +15,9 @@
     <thead>
       <tr>
         <th>Name</th>
-        <th>Download link</th>
-        <th> </th>
-        <th> </th>
+        <th>View File</th>
+        <th>Calculate Order</th>
+        <th>Delete File</th>
       </tr>
     </thead>
 
@@ -25,8 +25,8 @@
       <% @inputfiles.each do |inputfile| %>
         <tr>
           <td><%= inputfile.name %></td>
-          <td><%= link_to "Download Input File", inputfile.attachment_url %></td>
-          <td><%= link_to "Calculate Order", inputfile_orders_path(inputfile) %></td>
+          <td><%= button_to "View", inputfile.attachment_url, method: :get, class: "btn btn-primary" %></td>
+          <td><%= button_to "Calculate", inputfile_orders_path(inputfile), method: :get, class: "btn btn-primary" %></td>
           <td><%= button_to "Delete", inputfile, method: :delete, class: "btn btn-danger", confirm: "Are you sure that you wish to delete #{inputfile.name}?" %></td>
         </tr>
       <% end %>
