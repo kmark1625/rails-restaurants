@@ -16,7 +16,8 @@
       <tr>
         <th>Name</th>
         <th>Description</th>
-        <th>Calculate Order</th>
+        <th>Least items</th>
+        <th>Most diverse</th>
         <th>Delete File</th>
       </tr>
     </thead>
@@ -27,6 +28,7 @@
           <tr>
             <td><%= inputfile.name %></td>
             <td><%= inputfile.description %></td>
+            <td><%= button_to "Calculate", inputfile_orders_path(inputfile), method: :get, class: "btn btn-primary" %></td>
             <td><%= button_to "Calculate", inputfile_orders_path(inputfile), method: :get, class: "btn btn-primary" %></td>
             <td><%= button_to "Delete", inputfile, method: :delete, class: "btn btn-danger", confirm: "Are you sure that you wish to delete #{inputfile.name}?" %></td>
           </tr>

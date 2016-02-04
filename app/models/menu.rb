@@ -17,7 +17,6 @@ class Menu
     (target_price_in_cents).times do
       states.push([-1])
     end
-
     states.each_with_index do |state, index|
       item_array.each do |item|
         if item.price_in_cents <= index && states[index - item.price_in_cents][-1] >= 0 && (states[index - item.price_in_cents][-1] + 1 < states[index][-1] || states[index][-1] == -1)

@@ -10,7 +10,8 @@
       <tr>
         <th>Name</th>
         <th>Description</th>
-        <th>Calculate Order</th>
+        <th>Least items</th>
+        <th>Most diverse</th>
       </tr>
     </thead>
 
@@ -19,6 +20,7 @@
         <tr>
           <td><%= inputfile.name %></td>
           <td><%= inputfile.description %></td>
+          <td><%= button_to "Calculate", inputfile_orders_path(inputfile), method: :get, class: "btn btn-primary" %></td>
           <td><%= button_to "Calculate", inputfile_orders_path(inputfile), method: :get, class: "btn btn-primary" %></td>
         </tr>
       <% end %>
