@@ -25,6 +25,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'carrierwave', '~> 0.9'
 gem 'bootstrap-sass', '~> 2.3.2'
+gem 'simplecov', :require => false, :group => :test
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

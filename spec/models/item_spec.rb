@@ -10,4 +10,14 @@ RSpec.describe Item, :type => :model do
     item = Item.new("pie", 5.03)
     expect(item.price_in_cents).to eq(503)
   end
+
+  it 'allows you to find the name of an item' do
+    item = Item.new("pie", 5.03)
+    expect(item.name).to eq("pie")
+  end
+
+  it 'allows you to find the quantity of an item' do
+    item = Item.new("pie", 5.03)
+    expect(item.quantity).to eq(1)
+  end
 end
