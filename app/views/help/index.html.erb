@@ -1,4 +1,32 @@
 <div class="container help">
-  <h1>Input File Validation</h1>
-  <h1>Sample File Description</h1>
+  <h2>Input File Validation</h2>
+    <p>Testing was a very important part of this application. I have included a number of test menus that I used to test this application. I have also decided to keep a base set of these to allow the user to see the behavior of the application easily. Documentation for each test file is listed below. A summary of the different types of input validation is also listed below.</p>
+
+    <p>Another important piece of testing was scalability testing. As the problem is an NP-hard problem, it is likely to have poor performance with a large number of items. I decided that the intended behavior I wanted was to cap the number of allowed items for performance. As a result, I performed scalability testing to determine the number of items which causes poor performance (rated as taking 5 seconds to compute on my local machine). Any menus that exceeded this amount were sent back as errors.</p>
+
+  <h2>Sample File Description</h2>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Filename</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>SampleMenu1.txt</td>
+          <td>Original menu including with the challenge</td>
+        </tr>
+        <tr>
+          <td>SampleMenu2.txt</td>
+          <td>Menu with a large number of items</td>
+        </tr>
+        <tr>
+          <td>SampleMenu3.txt</td>
+          <td>Menu with a large target price</td>
+        </tr>
+
+      </tbody>
+    </table>
+
 </div>
