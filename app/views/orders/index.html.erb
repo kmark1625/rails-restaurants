@@ -3,7 +3,7 @@
   <p>Filename: <%= @inputfile.name %></p>
   <p><%= link_to "View Input File", @inputfile.attachment_url %></p>
   <textarea readonly class="item-display-text"><%= File.read(@image_link) %></textarea>
-  <p>Target Price: <%= @target_price %></p>
+  <p><strong>Target Price: <%= @target_price %></strong></p>
 
   <% if @number_of_items == 0 %>
     <p>There is no combination of menu items that adds up to exactly $<%= @target_price %></p>
