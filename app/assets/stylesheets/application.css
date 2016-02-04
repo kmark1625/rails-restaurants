@@ -44,6 +44,10 @@ body {
   text-align: center;
   color: white;
 }
+.item-display-text {
+  width: 250px;
+  height: 200px;
+}
 #mainpage-image {
   display: block;
   margin-left: auto;

@@ -1,7 +1,7 @@
 <h1>View the order</h1>
 <p>Filename: <%= @inputfile.name %></p>
 <p><%= link_to "View Input File", @inputfile.attachment_url %></p>
-<%= File.read(@image_link) %>
+<textarea class="item-display-text"><%= File.read(@image_link) %></textarea>
 <p>Target Price: <%= @target_price %></p>
 
 <% if @number_of_items == 0 %>
