@@ -49,7 +49,12 @@ Another important piece of testing was scalability testing. As the problem is an
 | menu11.txt | Large target price |
 | menu12.txt | Large number of items |
 
-
+## Future Work
+This section seeks to discuss future work that can be done to improve the site. Below are a list of features that can be implemented:
+* User registration/login/content
+* Input/Output from/to CSV
+* AJAX
+* Input from text area
 
 ## Deployment Instructions
 This application makes use of CarrierWave. As a result, ImageMagick must be installed on the machine. If using OSX, brew install imagemagick.
