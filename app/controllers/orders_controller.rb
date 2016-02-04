@@ -7,6 +7,11 @@ class OrdersController < ApplicationController
     @target_price = menu.target_price
     @image_link = File.join("public", @inputfile.attachment_url)
     @item_hash = menu.get_quantities(@item_array)
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data menu.to_csv, filename: "order-#{Date.today}.csv"}
+    end
   end
 
   private

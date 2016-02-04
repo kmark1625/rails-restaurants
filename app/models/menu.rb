@@ -1,3 +1,5 @@
+require 'csv'
+
 class Menu
   attr_accessor :target_price, :item_array
   # Expects target price (float) and an array of items
@@ -27,6 +29,20 @@ class Menu
     item_array = get_list_of_items(states)
     return item_array
   end
+
+  def to_csv
+    attributes = %w(item price quanity totalPrice)
+    items = get_quantities(find_combination).values
+    CSV.generate(headers: true) do |csv|
+      csv << attributes
+
+      items.each do |item|
+        values = [item.name, item.price, item.quantity, item.price*item.quantity]
+        csv.add_row values
+      end
+    end
+  end
+
 
   # takes in an array of items and gets a hash with quantity values
   def get_quantities(items_array)
