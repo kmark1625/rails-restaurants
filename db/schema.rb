@@ -18,9 +18,10 @@ ActiveRecord::Schema.define(version: 20160202181552) do
 
   create_table "inputfiles", force: :cascade do |t|
     t.string   "name"
+    t.string   "description"
     t.string   "attachment"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
 end

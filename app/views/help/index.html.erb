@@ -5,28 +5,24 @@
     <p>Another important piece of testing was scalability testing. As the problem is an NP-hard problem, it is likely to have poor performance with a large number of items. I decided that the intended behavior I wanted was to cap the number of allowed items for performance. As a result, I performed scalability testing to determine the number of items which causes poor performance (rated as taking 5 seconds to compute on my local machine). Any menus that exceeded this amount were sent back as errors.</p>
 
   <h2>Sample File Description</h2>
-    <table class="table table-bordered table-striped">
-      <thead>
-        <tr>
-          <th>Filename</th>
-          <th>Description</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>SampleMenu1.txt</td>
-          <td>Original menu including with the challenge</td>
-        </tr>
-        <tr>
-          <td>SampleMenu2.txt</td>
-          <td>Menu with a large number of items</td>
-        </tr>
-        <tr>
-          <td>SampleMenu3.txt</td>
-          <td>Menu with a large target price</td>
-        </tr>
+    <table class = "table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Calculate Order</th>
+      </tr>
+    </thead>
 
-      </tbody>
-    </table>
+    <tbody>
+      <% @inputfiles.each do |inputfile| %>
+        <tr>
+          <td><%= inputfile.name %></td>
+          <td><%= inputfile.description %></td>
+          <td><%= button_to "Calculate", inputfile_orders_path(inputfile), method: :get, class: "btn btn-primary" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
 </div>

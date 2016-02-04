@@ -2,7 +2,7 @@
   <h1>View the order</h1>
   <p>Filename: <%= @inputfile.name %></p>
   <p><%= link_to "View Input File", @inputfile.attachment_url %></p>
-  <textarea class="item-display-text"><%= File.read(@image_link) %></textarea>
+  <textarea readonly class="item-display-text"><%= File.read(@image_link) %></textarea>
   <p>Target Price: <%= @target_price %></p>
 
   <% if @number_of_items == 0 %>
@@ -21,12 +21,12 @@
 
       <tbody>
         <% @item_hash.each do |item_name, item| %>
-        <tr>
-          <td><%= item.name %></td>
-          <td>$<%= item.price %></td>
-          <td><%= item.quantity %></td>
-          <td>$<%= (item.price * item.quantity).round(2) %>
-        </tr>
+          <tr>
+            <td><%= item.name %></td>
+            <td>$<%= item.price %></td>
+            <td><%= item.quantity %></td>
+            <td>$<%= (item.price * item.quantity).round(2)%></td>
+          </tr>
         <% end %>
       </tbody>
     </table>

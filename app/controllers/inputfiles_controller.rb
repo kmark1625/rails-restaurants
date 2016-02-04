@@ -9,7 +9,7 @@ class InputfilesController < ApplicationController
 
   def create
     @inputfile = Inputfile.new(inputfile_params)
-
+    puts inputfile_params
     if @inputfile.save
       redirect_to inputfiles_path, notice: "The input file #{@inputfile.name} has been uploaded"
     else
@@ -26,6 +26,6 @@ class InputfilesController < ApplicationController
 
   private
   def inputfile_params
-    params.require(:inputfile).permit(:name, :attachment)
+    params.require(:inputfile).permit(:name, :attachment, :description)
   end
 end

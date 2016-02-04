@@ -15,20 +15,22 @@
     <thead>
       <tr>
         <th>Name</th>
-        <th>Download link</th>
-        <th> </th>
-        <th> </th>
+        <th>Description</th>
+        <th>Calculate Order</th>
+        <th>Delete File</th>
       </tr>
     </thead>
 
     <tbody>
       <% @inputfiles.each do |inputfile| %>
-        <tr>
-          <td><%= inputfile.name %></td>
-          <td><%= link_to "Download Input File", inputfile.attachment_url %></td>
-          <td><%= link_to "Calculate Order", inputfile_orders_path(inputfile) %></td>
-          <td><%= button_to "Delete", inputfile, method: :delete, class: "btn btn-danger", confirm: "Are you sure that you wish to delete #{inputfile.name}?" %></td>
-        </tr>
+        <% if inputfile.name != "Sample Menu 1" && inputfile.name != "Sample Menu 2" && inputfile.name != "Sample Menu 3" %>
+          <tr>
+            <td><%= inputfile.name %></td>
+            <td><%= inputfile.description %></td>
+            <td><%= button_to "Calculate", inputfile_orders_path(inputfile), method: :get, class: "btn btn-primary" %></td>
+            <td><%= button_to "Delete", inputfile, method: :delete, class: "btn btn-danger", confirm: "Are you sure that you wish to delete #{inputfile.name}?" %></td>
+          </tr>
+        <% end %>
       <% end %>
     </tbody>
   </table>

@@ -19,8 +19,6 @@ class Inputfile < ActiveRecord::Base
     f = File.open(File.join(directory, self.attachment_url), 'r')
     number_of_lines = f.read.count("\n")
     f.close
-    puts "Number of Lines:"
-    puts number_of_lines
     if number_of_lines > 1000
       errors.add(:number_of_items, "There are too many items in the file you are trying to input")
     end
