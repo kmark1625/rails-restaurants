@@ -34,24 +34,37 @@ class Menu
     return get_quantities(item_array)
   end
 
-  # def find_combination
-  #   target_price_in_cents = (target_price * 100).to_i
-  #   # format for each state: [item, previous state #, previous_item_array]
-  #   states = [[]] # for the first state we will need to push 0
-  #   # -1 represents no current solution found for given state
-  #   (target_price_in_cents).times do
-  #     states.push([-1])
-  #   end
-  #   states.each_with_index do |state, index|
-  #     item_array.each do |item|
-  #       if item.price_in_cents <= index && states[index - item.price_in_cents][-1].length >= 0 && (states[index - item.price_in_cents][-1] + 1 < states[index][-1] || states[index][-1] == -1)
-  #         states[index] = [item, index-item.price_in_cents, states[index - item.price_in_cents][-1] + 1]
-  #       end
-  #     end
-  #   end
-  #   item_array = get_list_of_items(states)
-  #   return item_array
-  # end
+  def find_combination_most_diverse
+    # Each State: [item, previous state #, min_items]
+    states = [State.new(nil, -999, 0, {})]
+    # -1 represents no current solution found for given state
+    (target_price_in_cents).times { states.push(State.new(nil, nil, -1)) }
+
+    states.each_with_index do |state, index|
+      item_array.each do |item|
+        quantities_hash_curr = states[index].quantities_hash
+        quantities_hash_prev = states[index - item.price_in_cents].quantities_hash
+        prev_state_index = index-item.price_in_cents
+
+        if item_less_than_price?(item, index) && quantities_hash_prev != nil
+          # TODO: Add conditional which verifies current is more diverse
+          quantities_hash_new = add_item(quantities_hash_prev.deep_dup, item)
+
+          if quantities_hash_curr == nil
+            quantities_hash_curr = quantities_hash_new
+          elsif more_diverse?(quantities_hash_new, quantities_hash_curr)
+             quantities_hash_curr = quantities_hash_new
+          end
+          # quantities_hash_curr = quantities_hash_new if more_diverse?(quantities_hash_new, quantities_hash_curr)
+          # quantities_hash_curr = add_item(quantities_hash_prev.deep_dup, item)
+          states[index] = State.new(item, prev_state_index, 0, quantities_hash_curr)
+        end
+      end
+    end
+    quantities_hash = states[target_price_in_cents].quantities_hash
+    @number_of_items = total_num_items(quantities_hash)
+    return quantities_hash
+  end
 
   def to_csv
     attributes = %w(item price quanity totalPrice)
@@ -105,5 +118,37 @@ class Menu
 
   def item_less_than_price?(item, price)
     return item.price_in_cents <= price
+  end
+
+  def add_item(quantities_hash, item)
+    if quantities_hash.keys.include?(item.name)
+      quantities_hash[item.name].quantity +=1
+    else
+      quantities_hash[item.name] = item
+    end
+    return quantities_hash
+  end
+
+  def total_num_items(quantities_hash)
+    sum = 0
+    quantities_hash.each do |key, index|
+      sum += index.quantity
+    end
+    return sum
+  end
+
+  def more_diverse?(quantities_hash_new, quantities_hash_curr)
+    new_quantities_array = get_quantities_array(quantities_hash_new).sort
+    curr_quantities_array = get_quantities_array(quantities_hash_curr).sort
+
+    return new_quantities_array.to_s < curr_quantities_array.to_s
+  end
+
+  def get_quantities_array(quantity_hash)
+    array = []
+    quantity_hash.each do |name, item|
+      array.push(item.quantity)
+    end
+    return array
   end
 end
