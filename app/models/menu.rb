@@ -12,29 +12,29 @@ class Menu
   end
 
   # Finds combination of items that match the target price exactly. Returns an array of items
+  # def find_combination
+  #   # Each State: [item, previous state #, min_items]
+  #   # states = [[nil, -999, 0]] # For the first state we set to 0
+  #   states = [State.new(nil, -999, 0)]
+  #   # -1 represents no current solution found for given state
+  #   (target_price_in_cents).times { states.push(State.new(nil, nil, -1)) }
+
+  #   states.each_with_index do |state, index|
+  #     item_array.each do |item|
+  #       min_items_curr = states[index].min_items
+  #       min_items_prev = states[index - item.price_in_cents].min_items
+  #       prev_state_index = index-item.price_in_cents
+  #       if item_less_than_price?(item, index) && min_items_prev >= 0 && (min_items_prev + 1 < min_items_curr || min_items_curr == -1)
+  #         states[index] = State.new(item, prev_state_index, min_items_prev + 1)
+  #       end
+  #     end
+  #   end
+  #   item_array = get_list_of_items(states)
+  #   @number_of_items = item_array.length
+  #   return get_quantities(item_array)
+  # end
+
   def find_combination
-    # Each State: [item, previous state #, min_items]
-    # states = [[nil, -999, 0]] # For the first state we set to 0
-    states = [State.new(nil, -999, 0)]
-    # -1 represents no current solution found for given state
-    (target_price_in_cents).times { states.push(State.new(nil, nil, -1)) }
-
-    states.each_with_index do |state, index|
-      item_array.each do |item|
-        min_items_curr = states[index].min_items
-        min_items_prev = states[index - item.price_in_cents].min_items
-        prev_state_index = index-item.price_in_cents
-        if item_less_than_price?(item, index) && min_items_prev >= 0 && (min_items_prev + 1 < min_items_curr || min_items_curr == -1)
-          states[index] = State.new(item, prev_state_index, min_items_prev + 1)
-        end
-      end
-    end
-    item_array = get_list_of_items(states)
-    @number_of_items = item_array.length
-    return get_quantities(item_array)
-  end
-
-  def find_combination_most_diverse
     # Each State: [item, previous state #, min_items]
     states = [State.new(nil, -999, 0, {})]
     # -1 represents no current solution found for given state
