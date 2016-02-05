@@ -2,11 +2,10 @@ class OrdersController < ApplicationController
   def index
     @inputfile = Inputfile.find_by(id: params[:inputfile_id])
     menu = parse_file
-    @item_array = menu.find_combination
-    @number_of_items = @item_array.length
     @target_price = menu.target_price
     @image_link = File.join("public", @inputfile.attachment_url)
-    @item_hash = menu.get_quantities(@item_array)
+    @item_hash = menu.find_combination
+    @number_of_items = menu.number_of_items
 
     respond_to do |format|
       format.html

@@ -15,13 +15,6 @@ RSpec.describe Menu, :type => :model do
     menu = Menu.new(15.05, item_array)
     expect(menu.target_price).to eq(15.05)
   end
-  it 'allows you to view the item array of a menu' do
-    item1 = Item.new("pie", 5.03)
-    item2 = Item.new("pizza", 5.05)
-    item_array = [item1, item2]
-    menu = Menu.new(15.05, item_array)
-    expect(menu.item_array).to_not be_nil
-  end
   it 'returns combination of items with least number' do
     item1 = Item.new("mixed fruit", 2.15)
     item2 = Item.new("french fries", 2.75)
@@ -32,7 +25,7 @@ RSpec.describe Menu, :type => :model do
     item_array = [item1, item2, item3, item4, item5, item6]
     menu = Menu.new(15.05, item_array)
     order = menu.find_combination
-    expect(order.length).to eq(4)
+    expect(order.keys.length).to eq(3)
   end
   it 'returns order with quantity' do
     item1 = Item.new("mixed fruit", 2.15)
@@ -44,7 +37,6 @@ RSpec.describe Menu, :type => :model do
     item_array = [item1, item2, item3, item4, item5, item6]
     menu = Menu.new(15.05, item_array)
     order = menu.find_combination
-    quantity_hash = menu.get_quantities(order)
-    expect(quantity_hash.keys.length).to eq(3)
+    expect(order.keys.length).to eq(3)
   end
 end

@@ -2,11 +2,13 @@ require 'csv'
 
 class Menu
   attr_accessor :target_price, :item_array
+  attr_reader :number_of_items
 
   # Expects target price (float) and an array of items
   def initialize(target_price, item_array)
     @target_price = target_price
     @item_array = item_array
+    @number_of_items = 0
   end
 
   # Finds combination of items that match the target price exactly. Returns an array of items
@@ -23,12 +25,13 @@ class Menu
         min_items_prev = states[index - item.price_in_cents].min_items
         prev_state_index = index-item.price_in_cents
         if item_less_than_price?(item, index) && min_items_prev >= 0 && (min_items_prev + 1 < min_items_curr || min_items_curr == -1)
-          # states[index] = [item, prev_state_index, min_items_prev +1]
           states[index] = State.new(item, prev_state_index, min_items_prev + 1)
         end
       end
     end
     item_array = get_list_of_items(states)
+    @number_of_items = item_array.length
+    return get_quantities(item_array)
   end
 
   # def find_combination
@@ -62,9 +65,28 @@ class Menu
     end
   end
 
-  # takes in an array of items and gets a hash with quantity values
+  private
+  def get_list_of_items(states_array)
+    item_array = []
+    num_items_combination = states_array[target_price_in_cents].min_items
+    return item_array if num_items_combination == -1
+
+    items_remain = true
+    val = target_price_in_cents
+    while items_remain
+      current_state = states_array[val]
+      if states_array[val].prev_state_index == -999
+        items_remain = false
+      else
+        item_array.push(current_state.item)
+        val = current_state.prev_state_index
+      end
+    end
+    return item_array
+  end
+
+  # Takes in an array of items and returns a hash with quantity values
   def get_quantities(items_array)
-    # [item1, item2, item3, item4, etc]
     quantities = {}
     items_array.each do |item|
       item_name = item.name
@@ -75,25 +97,6 @@ class Menu
       end
     end
     return quantities
-  end
-
-  private
-  def get_list_of_items(states_array)
-    item_array = []
-    num_items_combination = states_array[target_price_in_cents].min_items
-    return item_array if num_items_combination == -1
-
-    items_remain = true
-    val = target_price_in_cents
-    while items_remain
-      if states_array[val].prev_state_index == -999
-        items_remain = false
-      else
-        item_array.push(states_array[val].item)
-        val = states_array[val].prev_state_index
-      end
-    end
-    return item_array
   end
 
   def target_price_in_cents
