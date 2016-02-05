@@ -12,18 +12,19 @@ class Menu
   # Finds combination of items that match the target price exactly. Returns an array of items
   def find_combination
     # Each State: [item, previous state #, min_items]
-    states = [[nil, -999, 0]] # For the first state we set to 0
-
+    # states = [[nil, -999, 0]] # For the first state we set to 0
+    states = [State.new(nil, -999, 0)]
     # -1 represents no current solution found for given state
-    (target_price_in_cents).times { states.push([-1]) }
+    (target_price_in_cents).times { states.push(State.new(nil, nil, -1)) }
 
     states.each_with_index do |state, index|
       item_array.each do |item|
-        min_items_curr = states[index][-1]
-        min_items_prev = states[index - item.price_in_cents][-1]
+        min_items_curr = states[index].min_items
+        min_items_prev = states[index - item.price_in_cents].min_items
         prev_state_index = index-item.price_in_cents
         if item_less_than_price?(item, index) && min_items_prev >= 0 && (min_items_prev + 1 < min_items_curr || min_items_curr == -1)
-          states[index] = [item, prev_state_index, min_items_prev +1]
+          # states[index] = [item, prev_state_index, min_items_prev +1]
+          states[index] = State.new(item, prev_state_index, min_items_prev + 1)
         end
       end
     end
@@ -79,17 +80,17 @@ class Menu
   private
   def get_list_of_items(states_array)
     item_array = []
-    num_items_combination = states_array[target_price_in_cents][-1]
+    num_items_combination = states_array[target_price_in_cents].min_items
     return item_array if num_items_combination == -1
 
     items_remain = true
     val = target_price_in_cents
     while items_remain
-      if states_array[val][1] == -999
+      if states_array[val].prev_state_index == -999
         items_remain = false
       else
-        item_array.push(states_array[val][0])
-        val = states_array[val][1]
+        item_array.push(states_array[val].item)
+        val = states_array[val].prev_state_index
       end
     end
     return item_array
