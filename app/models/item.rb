@@ -6,12 +6,6 @@ class Item
   validates :name, :presence => true
   validates :price, :presence => true
 
-  # def initialize(name, price)
-  #   @name = name
-  #   @price = price
-  #   @quantity = 1
-  # end
-
   def initialize(attributes = {})
     attributes.each do |name, value|
       send("#{name}=", value)

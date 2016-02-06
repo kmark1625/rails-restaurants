@@ -26,4 +26,12 @@ RSpec.describe Menu, :type => :model do
     order = @menu.find_combination_most_diverse
     expect(order.keys.length).to eq(3)
   end
+  it 'validates if name is present' do
+    item = Item.new(price: 532)
+    expect(item.valid?).to be(false)
+  end
+  it 'validates if price is present' do
+    item = Item.new(name: "hot wings")
+    expect(item.valid?).to be(false)
+  end
 end

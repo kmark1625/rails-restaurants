@@ -2,11 +2,16 @@ class Inputfile < ActiveRecord::Base
   mount_uploader :attachment, AttachmentUploader
   validates :name, presence: true, length: { maximum: 50 }
   validates :description, presence: true, length: { maximum: 255 }
-  validate :target_price_must_be_valid, :not_too_many_items
+  validate :all_validations
+
+  def all_validations
+    # Validations
+    target_price_must_be_valid
+    not_too_many_items
+  end
 
   def target_price_must_be_valid
-    directory = "public"
-    f = File.open(File.join(directory, self.attachment_url), 'r')
+    f = open_file
     line = f.readline
     if !valid_price?(line)
       errors.add(:line, "target price must be valid and less than 25,000")
@@ -15,13 +20,15 @@ class Inputfile < ActiveRecord::Base
   end
 
   def not_too_many_items
-    directory = "public"
-    f = File.open(File.join(directory, self.attachment_url), 'r')
+    f = open_file
     number_of_lines = f.read.count("\n")
-    f.close
     if number_of_lines > 1000
       errors.add(:number_of_items, "There are too many items in the file you are trying to input")
     end
+    f.close
+  end
+
+  def all_prices_floats
   end
 
   private
@@ -32,5 +39,10 @@ class Inputfile < ActiveRecord::Base
     else
       return false
     end
+  end
+  def open_file
+    directory = "public"
+    file_handle = File.open(File.join(directory, self.attachment_url), 'r')
+    return file_handle
   end
 end
