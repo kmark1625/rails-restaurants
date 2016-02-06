@@ -30,8 +30,8 @@
         <tr>
           <td><%= inputfile.name %></td>
           <td><%= inputfile.description %></td>
-          <td><%= button_to "Calculate", inputfile_orders_path(inputfile), method: :get, class: "btn btn-primary" %></td>
-          <td><%= button_to "Calculate", inputfile_orders_path(inputfile), method: :get, class: "btn btn-primary" %></td>
+          <td><%= button_to "Calculate", inputfile_orders_path(inputfile), method: :get, class: "btn btn-primary", params: {algorithm: 0} %></td>
+          <td><%= button_to "Calculate", inputfile_orders_path(inputfile), method: :get, class: "btn btn-primary", params: {algorithm: 1} %></td>
         </tr>
       <% end %>
     </tbody>
