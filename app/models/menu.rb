@@ -140,8 +140,9 @@ class Menu
   def more_diverse?(quantities_hash_new, quantities_hash_curr)
     new_quantities_array = get_quantities_array(quantities_hash_new).sort
     curr_quantities_array = get_quantities_array(quantities_hash_curr).sort
+    more_diverse_var = more_diverse(new_quantities_array, curr_quantities_array)
 
-    return more_diverse(new_quantities_array, curr_quantities_array)
+    return more_diverse_var
   end
 
   def get_quantities_array(quantity_hash)
@@ -153,17 +154,12 @@ class Menu
   end
 
   def more_diverse(array1, array2)
-    # [1,2,1] vs [6] true
-    more_diverse = true
-    array1.each_with_index do |item1, index|
-      if array2.length < array1.length
-        more_diverse = false
-        break
-      elsif array1[index] > array2[index]
-        more_diverse = false
-        break
-      end
+    if array1.length < array2.length
+      return false
+    elsif array2.length < array1.length
+      return true
+    else
+      return (array1 <=> array2) > 0
     end
-    return more_diverse
   end
 end
