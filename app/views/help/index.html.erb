@@ -1,19 +1,4 @@
 <div class="container help">
-  <h2>Input File Validation</h2>
-    <p>Testing was a very important part of this application. I have included a number of test menus that I used to test this application. Below is a set of sample menus that allow you to explore the basic functionality of the application. Documentation for each test file is listed below. A summary of the different types of input validation performed on the input .txt file is also listed below.</p>
-
-    <p>Another important piece of testing was performance testing. As the problem is an NP-hard problem, it is likely to have poor performance with a large number of items. I decided that the intended behavior I wanted was to cap the number of allowed items for performance. As a result, I performed scalability testing to determine the number of items which causes poor performance (rated as taking 5 seconds to compute on my local machine). Any menus that exceeded this amount were sent back as errors.</p>
-
-    <p><strong>Input Validations</strong></p>
-    <ul>
-      <li>Handles one line input</li>
-      <li>Handles multiple line input</li>
-      <li>Handles files with and without $</li>
-      <li>Returns error if not a float or string in given position</li>
-      <li>Returns error with large target price (>$20000)</li>
-      <li>Returns error with large number of items (>1000)</li>
-    </ul>
-
   <h2>Sample File Description</h2>
     <table class = "table table-bordered table-striped">
     <thead>
@@ -36,8 +21,23 @@
       <% end %>
     </tbody>
   </table>
-  <h2>Least Items Order vs Most Diverse Order</h2>
-    <p>There are two different algorithms presented to calculate a combination of items that match the target price. The first algorithm calculates an order containing the least amount of items. This allows the order to be displayed succintly with the fewest number of items possible.</p>
+  <h2>Least Items vs Most Diverse</h2>
+    <p>There are two different algorithms presented to calculate a combination of items that match the target price. The first algorithm calculates an order containing the least amount of items. This allows the order to be displayed succintly with the fewest number of items possible. This case is particularly interesting when there is one large item that fits well into the total.</p>
 
-    <p>The second algorithm calculates an order containing the most diverse amount of items. For example, the algorithm would favor quantities of [3,4,5,6] rather than [10, 7] or [15,1,1,1]. This presents an interesting alternative when there is an option that features very little variety using the first algorithm.</p>
+    <p>The second algorithm calculates an order containing the most diverse amount of items. This algorithm optimizes for th least used items at each iteration. For example, the algorithm would favor quantities of [3,4,5,6] rather than [10, 7] or [5,5,5,5]. This case provides an interesting alternative, particularly when there is a large number of similarly priced items or there is a high target price. This result is more similar to the type of order one might actually make at a bar with a large party of people due to its variety.</p>
+
+    <h2>Input File Validation</h2>
+    <p>Testing was a very important part of this application. I have included a number of test menus that I used to test this application. Above is a set of sample menus that allow you to explore the basic functionality of the application. Documentation for each test file is listed. A summary of the different types of input validation performed on the input .txt file is listed below.</p>
+
+    <p>Another important piece of testing was performance testing. As the problem is an NP-hard problem, it is likely to have poor performance with a large number of items. I decided that the intended behavior I wanted was to cap the number of allowed items for performance. Performance testing determined the number of items which causes poor performance (rated as taking 15 seconds to compute on my local machine). Any menus that exceeded this amount were sent back as errors.</p>
+
+    <p><strong>Input Validations</strong></p>
+    <ul>
+      <li>Handles one line input</li>
+      <li>Handles multiple line input</li>
+      <li>Handles files with and without $</li>
+      <li>Returns error if not a float or string in given position</li>
+      <li>Returns error with large target price (>$20000)</li>
+      <li>Returns error with large number of items (>1000)</li>
+    </ul>
   </div>
