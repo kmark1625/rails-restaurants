@@ -55,8 +55,7 @@ class Menu
           elsif more_diverse?(quantities_hash_new, quantities_hash_curr)
              quantities_hash_curr = quantities_hash_new
           end
-          # quantities_hash_curr = quantities_hash_new if more_diverse?(quantities_hash_new, quantities_hash_curr)
-          # quantities_hash_curr = add_item(quantities_hash_prev.deep_dup, item)
+
           states[index] = State.new(item, prev_state_index, 0, quantities_hash_curr)
         end
       end
@@ -131,6 +130,7 @@ class Menu
 
   def total_num_items(quantities_hash)
     sum = 0
+    return sum if !quantities_hash
     quantities_hash.each do |key, index|
       sum += index.quantity
     end
