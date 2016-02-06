@@ -16,8 +16,4 @@ class Item
   def price_in_cents
     return (price * 100).to_i
   end
-
-  def persisted?
-    false
-  end
 end

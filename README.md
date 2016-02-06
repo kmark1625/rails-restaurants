@@ -48,7 +48,7 @@ Another important piece of testing was performance testing. As the problem is a 
 | menu4.txt | Invalid menu with no menu items |
 | menu5.txt | Valid menu with items containing no solution |
 | menu6.txt | Invalid menu with string values for prices instead of floats. |
-| menu7.txt | Valid menu with all items on one line |
+| menu7.txt | Invalid menu with a missing price or item |
 | menu8.txt | Invalid menu with numbers instead of string |
 | menu9.txt | Valid menu with no dollar signs |
 | menu10.txt | Invalid menu with no commas |

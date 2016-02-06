@@ -8,6 +8,7 @@ class Inputfile < ActiveRecord::Base
     # Validations
     target_price_must_be_valid
     not_too_many_items
+    validate_lines
   end
 
   def target_price_must_be_valid
@@ -28,7 +29,24 @@ class Inputfile < ActiveRecord::Base
     f.close
   end
 
-  def all_prices_floats
+  def validate_lines
+    f = open_file
+    line = f.readline
+    # Read in remaining items
+    f.each_line do |line|
+      if !line.include?(",")
+        errors.add(:file, "Does not include a comma delimited line")
+        break
+      end
+      item_name = line.split(",")[0]
+      item_price = line.split(",")[1].tr("$","").to_f
+      item = Item.new(name: item_name, price: item_price)
+      puts "PRICE: #{item_price}"
+      if !item.valid?
+        errors.add(:item, "One of the uploaded items is not valid")
+      end
+    end
+    f.close
   end
 
   private
