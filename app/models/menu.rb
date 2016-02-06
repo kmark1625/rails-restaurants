@@ -68,7 +68,7 @@ class Menu
 
   def to_csv
     attributes = %w(item price quanity totalPrice)
-    items = get_quantities(find_combination).values
+    items = find_combination.values
     CSV.generate(headers: true) do |csv|
       csv << attributes
       items.each do |item|
