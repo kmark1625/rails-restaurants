@@ -2,8 +2,9 @@ require "rails_helper"
 
 RSpec.describe Item, :type => :model do
   before(:each) do
-    @item = Item.new("pie", 5.03)
+    @item = Item.new(name: "pie", price: 5.03)
   end
+
   it 'allows you to create an item' do
     expect(@item).to_not be_nil
   end

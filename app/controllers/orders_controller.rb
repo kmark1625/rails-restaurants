@@ -29,7 +29,7 @@ class OrdersController < ApplicationController
     f.each_line do |line|
       item_name = line.split(",")[0]
       item_price = line.split(",")[1].tr("$","").to_f
-      item = Item.new(item_name, item_price)
+      item = Item.new(name: item_name, price: item_price)
       item_array.push(item)
     end
 

@@ -2,12 +2,12 @@ require "rails_helper"
 
 RSpec.describe Menu, :type => :model do
   before(:each) do
-    item1 = Item.new("mixed fruit", 2.15)
-    item2 = Item.new("french fries", 2.75)
-    item3 = Item.new("side salad", 3.35)
-    item4 = Item.new("hot wings", 3.55)
-    item5 = Item.new("mozzarella sticks", 4.20)
-    item6 = Item.new("sampler plate", 5.80)
+    item1 = Item.new(name: "mixed fruit", price: 2.15)
+    item2 = Item.new(name: "french fries", price: 2.75)
+    item3 = Item.new(name: "side salad", price: 3.35)
+    item4 = Item.new(name: "hot wings", price: 3.55)
+    item5 = Item.new(name: "mozzarella sticks", price: 4.20)
+    item6 = Item.new(name: "sampler plate", price: 5.80)
     item_array = [item1, item2, item3, item4, item5, item6]
     @menu = Menu.new(15.05, item_array)
   end
@@ -25,5 +25,13 @@ RSpec.describe Menu, :type => :model do
   it 'returns combination of items that are most diverse' do
     order = @menu.find_combination_most_diverse
     expect(order.keys.length).to eq(3)
+  end
+  it 'validates if name is present' do
+    item = Item.new(price: 532)
+    expect(item.valid?).to be(false)
+  end
+  it 'validates if price is present' do
+    item = Item.new(name: "hot wings")
+    expect(item.valid?).to be(false)
   end
 end
