@@ -81,6 +81,10 @@ class Menu
     end
   end
 
+  def target_price_in_cents
+    (target_price * 100).to_i
+  end
+
   private
   def get_list_of_items(states_array)
     item_array = []
@@ -113,10 +117,6 @@ class Menu
       end
     end
     return quantities
-  end
-
-  def target_price_in_cents
-    (target_price * 100).to_i
   end
 
   def item_less_than_price?(item, price)

@@ -35,6 +35,17 @@ RSpec.describe Menu, :type => :model do
     expect(menu.valid?).to be(false)
   end
 
+  it 'allows you to create a CSV' do
+    menu = build_original_menu_with_items
+    csv = menu.to_csv
+    expect(csv).to_not be_nil
+  end
+
+  it 'returns target price in cents' do
+    menu = build(:menu, target_price: 15.05)
+    expect(menu.target_price_in_cents).to eq(1505)
+  end
+
   def build_original_menu_with_items
     item1 = build(:item, name: "mixed fruit", price: 2.15)
     item2 = build(:item, name: "french fries", price: 2.75)
