@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Item, :type => :model do
   before(:each) do
-    @item = FactoryGirl::build(:item)
+    @item = build(:item)
   end
 
   it 'allows you to create an item' do
