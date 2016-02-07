@@ -41,7 +41,6 @@ class Inputfile < ActiveRecord::Base
       item_name = line.split(",")[0]
       item_price = line.split(",")[1].tr("$","").to_f
       item = Item.new(name: item_name, price: item_price)
-      puts "PRICE: #{item_price}"
       if !item.valid?
         errors.add(:item, "One of the uploaded items is not valid")
       end
