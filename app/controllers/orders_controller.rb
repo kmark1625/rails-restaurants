@@ -4,7 +4,6 @@ class OrdersController < ApplicationController
     menu = parse_file
     @target_price = menu.target_price
     @image_link = File.join("public", @inputfile.attachment_url)
-    puts "PARAMS: #{params[:algorithm]}"
     if params[:algorithm].to_i == 1
       @item_hash = menu.find_combination_most_diverse
     else

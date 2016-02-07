@@ -72,4 +72,9 @@ rake db:seed
 rails s
 ```
 
+RSpec was used for testing. To run the tests, run the following command:
+```
+rake spec
+```
+
 
