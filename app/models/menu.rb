@@ -1,13 +1,17 @@
 require 'csv'
 
 class Menu
+  include ActiveModel::Validations
+
   attr_accessor :target_price, :item_array
   attr_reader :number_of_items
+  validates :target_price, :presence => true
+  validates :item_array, :presence => true
 
-  # Expects target price (float) and an array of items
-  def initialize(target_price, item_array)
-    @target_price = target_price
-    @item_array = item_array
+  def initialize(attributes = {})
+    attributes.each do |name, value|
+      send("#{name}=", value)
+    end
     @number_of_items = 0
   end
 

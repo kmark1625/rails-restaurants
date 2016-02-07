@@ -34,6 +34,6 @@ class OrdersController < ApplicationController
 
     f.close
 
-    return Menu.new(target_price, item_array)
+    return Menu.new(target_price: target_price, item_array: item_array)
   end
 end

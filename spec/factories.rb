@@ -8,6 +8,5 @@ FactoryGirl.define do
   factory :menu do
     target_price 15.00
     item_array []
-    number_of_items 0
   end
 end
