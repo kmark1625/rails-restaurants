@@ -2,18 +2,21 @@ require "rails_helper"
 
 RSpec.describe Menu, :type => :model do
   before(:each) do
-    item1 = Item.new(name: "mixed fruit", price: 2.15)
-    item2 = Item.new(name: "french fries", price: 2.75)
-    item3 = Item.new(name: "side salad", price: 3.35)
-    item4 = Item.new(name: "hot wings", price: 3.55)
-    item5 = Item.new(name: "mozzarella sticks", price: 4.20)
-    item6 = Item.new(name: "sampler plate", price: 5.80)
+    item1 = build(:item, name: "mixed fruit", price: 2.15)
+    item2 = build(:item, name: "french fries", price: 2.75)
+    item3 = build(:item, name: "side salad", price: 3.35)
+    item4 = build(:item, name: "hot wings", price: 3.55)
+    item5 = build(:item, name: "mozzarella sticks", price: 4.20)
+    item6 = build(:item, name: "sampler plate", price: 5.80)
     item_array = [item1, item2, item3, item4, item5, item6]
     @menu = Menu.new(15.05, item_array)
   end
 
-  it 'allows you to create an item' do
-    expect(@menu.item_array.length).to eq(6)
+  it 'allows you to create a menu with an item' do
+    item = build(:item, name: "mixed fruit", price: 2.15)
+    item_array = [item]
+    menu = build(:menu, item_array: item_array)
+    expect(menu.item_array.length).to eq(1)
   end
   it 'allows you to view the target price of a menu' do
     expect(@menu.target_price).to eq(15.05)
