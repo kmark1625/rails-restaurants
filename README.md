@@ -38,6 +38,7 @@ Another important piece of testing was performance testing. As the problem is a 
 * Returns error with large number of items (>1000)
 
 ### Test Menus
+The following test menus can be found in spec/test-menus
 
 | Filename | Description |
 | ------------ | :----------------- |
