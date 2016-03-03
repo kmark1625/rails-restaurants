@@ -1,79 +1,40 @@
-require 'csv'
+class Finder
+  attr_accessor :menu
 
-class Menu
-  include ActiveModel::Validations
-
-  attr_accessor :target_price, :item_array, :number_of_items
-  validates :target_price, :presence => true
-  validates :item_array, :presence => true
-
-  def initialize(attributes = {})
-    attributes.each do |name, value|
-      send("#{name}=", value)
-    end
-    @number_of_items = 0
+  def initialize(menu)
+    @menu = menu
   end
 
   def find_combination
-    finder = Finder.new(self)
-    finder.find_combination
-  end
-
-  def find_combination_most_diverse
     # Each State: [item, previous state #, min_items]
-    states = [State.new(nil, -999, 0, {})]
+    # states = [[nil, -999, 0]] # For the first state we set to 0
+    states = [State.new(nil, -999, 0)]
     # -1 represents no current solution found for given state
-    (target_price_in_cents).times { states.push(State.new(nil, nil, -1)) }
+    (menu.target_price_in_cents).times { states.push(State.new(nil, nil, -1)) }
 
     states.each_with_index do |state, index|
-      item_array.each do |item|
-        quantities_hash_curr = states[index].quantities_hash
-        quantities_hash_prev = states[index - item.price_in_cents].quantities_hash
+      menu.item_array.each do |item|
+        min_items_curr = states[index].min_items
+        min_items_prev = states[index - item.price_in_cents].min_items
         prev_state_index = index-item.price_in_cents
-
-        if item_less_than_price?(item, index) && quantities_hash_prev != nil
-          # TODO: Add conditional which verifies current is more diverse
-          quantities_hash_new = add_item(quantities_hash_prev.deep_dup, item)
-
-          if quantities_hash_curr == nil
-            quantities_hash_curr = quantities_hash_new
-          elsif more_diverse?(quantities_hash_new, quantities_hash_curr)
-             quantities_hash_curr = quantities_hash_new
-          end
-
-          states[index] = State.new(item, prev_state_index, 0, quantities_hash_curr)
+        if item_less_than_price?(item, index) && min_items_prev >= 0 && (min_items_prev + 1 < min_items_curr || min_items_curr == -1)
+          states[index] = State.new(item, prev_state_index, min_items_prev + 1)
         end
       end
     end
-    quantities_hash = states[target_price_in_cents].quantities_hash
-    @number_of_items = total_num_items(quantities_hash)
-    return quantities_hash
-  end
-
-  def to_csv
-    attributes = %w(item price quanity totalPrice)
-    items = find_combination.values
-    CSV.generate(headers: true) do |csv|
-      csv << attributes
-      items.each do |item|
-        values = [item.name, item.price, item.quantity, item.price*item.quantity]
-        csv.add_row values
-      end
-    end
-  end
-
-  def target_price_in_cents
-    (target_price * 100).to_i
+    item_array = get_list_of_items(states)
+    menu.number_of_items = item_array.length
+    return get_quantities(item_array)
   end
 
   private
   def get_list_of_items(states_array)
     item_array = []
-    num_items_combination = states_array[target_price_in_cents].min_items
+    num_items_combination = states_array[menu.target_price_in_cents].min_items
     return item_array if num_items_combination == -1
 
     items_remain = true
-    val = target_price_in_cents
+    val = menu.target_price_in_cents
     while items_remain
       current_state = states_array[val]
       if states_array[val].prev_state_index == -999
