@@ -6,19 +6,19 @@ class Finder
   end
 
   def find_combination
-    # Each State: [item, previous state #, min_items]
-    # states = [[nil, -999, 0]] # For the first state we set to 0
-    states = [State.new(nil, -999, 0)]
-    # -1 represents no current solution found for given state
-    (menu.target_price_in_cents).times { states.push(State.new(nil, nil, -1)) }
+    states = [State.initial_state]
+    (menu.target_price_in_cents).times { states.push(State.new) }
 
     states.each_with_index do |state, index|
       menu.item_array.each do |item|
         min_items_curr = states[index].min_items
         min_items_prev = states[index - item.price_in_cents].min_items
         prev_state_index = index-item.price_in_cents
-        if item_less_than_price?(item, index) && min_items_prev >= 0 && (min_items_prev + 1 < min_items_curr || min_items_curr == -1)
-          states[index] = State.new(item, prev_state_index, min_items_prev + 1)
+
+        if curr_better_than_prev?(item, index, min_items_prev, min_items_curr)
+          state.item = item
+          state.prev_state_index = prev_state_index
+          state.min_items = min_items_prev + 1
         end
       end
     end
@@ -27,7 +27,44 @@ class Finder
     return get_quantities(item_array)
   end
 
+  def find_combination_most_diverse
+    # Each State: [item, previous state #, min_items]
+    states = [State.new(nil, -999, 0, {})]
+    (menu.target_price_in_cents).times { states.push(State.new) }
+
+    states.each_with_index do |state, index|
+      menu.item_array.each do |item|
+        quantities_hash_curr = states[index].quantities_hash
+        quantities_hash_prev = states[index - item.price_in_cents].quantities_hash
+        prev_state_index = index-item.price_in_cents
+
+        if item_less_than_price?(item, index) && quantities_hash_prev != nil
+          # TODO: Add conditional which verifies current is more diverse
+          quantities_hash_new = add_item(quantities_hash_prev.deep_dup, item)
+
+          if quantities_hash_curr == nil
+            quantities_hash_curr = quantities_hash_new
+          elsif more_diverse?(quantities_hash_new, quantities_hash_curr)
+             quantities_hash_curr = quantities_hash_new
+          end
+
+          state.item = item
+          state.prev_state_index = prev_state_index
+          state.min_items = 0
+          state.quantities_hash = quantities_hash_curr
+        end
+      end
+    end
+    quantities_hash = states[menu.target_price_in_cents].quantities_hash
+    menu.number_of_items = total_num_items(quantities_hash)
+    return quantities_hash
+  end
+
   private
+  def curr_better_than_prev?(item, index, min_items_prev, min_items_curr)
+    item_less_than_price?(item, index) && min_items_prev >= 0 && (min_items_prev + 1 < min_items_curr || min_items_curr == -1)
+  end
+
   def get_list_of_items(states_array)
     item_array = []
     num_items_combination = states_array[menu.target_price_in_cents].min_items
