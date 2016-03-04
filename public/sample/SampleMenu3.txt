@@ -1,0 +1,14 @@
+$1500
+mixed fruit,$2.15
+french fries,$2.75
+side salad,$3.35
+hot wings,$3.55
+mozzarella sticks,$4.20
+sampler plate,$5.80
+hot tea,$2.50
+herbal tea,$2.75
+hot chocolate,$3.00
+bottled water,$2.50
+sparkling water,$3.50
+milk,$2.25
+chocolate milk,$2.50
