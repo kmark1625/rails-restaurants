@@ -7,6 +7,6 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 # Seed sample input files
-inputfile1 = Inputfile.create(name: "Sample Menu 1", description: "Original menu including with the challenge", attachment: Rails.root.join("public/uploads/sample/SampleMenu1.txt").open)
-inputfile2 = Inputfile.create(name: "Sample Menu 2", description: "Menu with a large number of items", attachment: Rails.root.join("public/uploads/sample/SampleMenu2.txt").open)
-inputfile3 = Inputfile.create(name: "Sample Menu 3", description: "Menu with a large target price", attachment: Rails.root.join("public/uploads/sample/SampleMenu3.txt").open)
+inputfile1 = Inputfile.create(name: "Sample Menu 1", description: "Original menu including with the challenge", attachment: Rails.root.join("public/sample/SampleMenu1.txt").open)
+inputfile2 = Inputfile.create(name: "Sample Menu 2", description: "Menu with a large number of items", attachment: Rails.root.join("public/sample/SampleMenu2.txt").open)
+inputfile3 = Inputfile.create(name: "Sample Menu 3", description: "Menu with a large target price", attachment: Rails.root.join("public/sample/SampleMenu3.txt").open)
